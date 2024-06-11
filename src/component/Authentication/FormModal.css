@@ -1,0 +1,31 @@
+.form-modal {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .form-toggle .btn {
+    width: 50%;
+    border: 1px solid #57B846;
+  }
+  
+  #login-form, #signup-form {
+    margin-top: 20px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .btn-success {
+    background-color: #57B846;
+    border-color: #57B846;
+  }
+  
+  .text-center a {
+    color: #57B846;
+  }
+  
+  hr {
+    margin-top: 20px;
+  }
+  
