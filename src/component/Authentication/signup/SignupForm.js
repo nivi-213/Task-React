@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 const SignupForm = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,6 +14,12 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [users, setUsers] = useState([]);
+  // const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
@@ -42,23 +51,15 @@ const SignupForm = () => {
     setPassword("");
     setMobileNo("");
     setRole("");
-};
+  };
 
-const LoginForm = () => {
+  const LoginForm = () => {
     navigate("/login"); // Directly navigating to login page
-};
+  };
 
   return (
     <>
       <div id="signup-form" className="container mt-5">
-        <div>
-          <button
-         className="btn btn-success mb-4 "
-            onClick={LoginForm}
-          >
-            log in
-          </button>
-        </div>
         {message && <p>{message}</p>}
         <div className="card p-5">
           <h2 className="text-center mb-3">SignUp Form</h2>
@@ -90,15 +91,21 @@ const LoginForm = () => {
                 onChange={(e) => setMobileNo(e.target.value)}
               />
             </div>
-            <div className="mb-3">
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Create password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+
+            <div className="input-group">
+  <input
+    type={showPassword ? "text" : "password"}
+    className="form-control password-input"
+    placeholder="Create password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+  <span className="toggle-password" onClick={togglePasswordVisibility}>
+    <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+  </span>
+</div>
+
+
             <div>
               <select
                 value={role}
@@ -117,6 +124,9 @@ const LoginForm = () => {
             <p className="text-center mt-3">
               Clicking <strong>Create Account</strong> means that you agree to
               our <a href="javascript:void(0)">terms of service</a>.
+              <a href="/login" className=" ms-4">
+                Login
+              </a>
             </p>
             <hr />
           </form>

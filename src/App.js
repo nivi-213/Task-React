@@ -6,18 +6,25 @@ import LoginForm from "./component/Authentication/login/LoginForm";
 import SignupForm from "./component/Authentication/signup/SignupForm";
 import Registration from "./component/Form/Registration";
 import ProtectedRoute from "./component/Authentication/ProtectedRoute";
+import UserTable from "./component/Form/UserTable";
 
 const App = () => {
   return (
     <div className="container">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FormModal />} />
+          {/* <Route path="/" element={<FormModal />} /> */}
+          <Route path="/" element={<Navigate to={"signup"} />} />
+
+
 
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginForm />} />
-          <ProtectedRoute path="/register" element={<Registration />} />
-          {/* <Route path="/register" element={<Registration />} /> */}
+      
+          <Route path="/usertable" element={<Registration />} />
+          <Route path="/admintable" element={<UserTable />} />
+
+       
         </Routes>
       </BrowserRouter>
       {/* <FormModal/> */}
