@@ -1,0 +1,44 @@
+/* login.css */
+
+#login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .carding {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* .form-control {
+    margin-bottom: 15px;
+  } */
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  .text-danger {
+    color: #dc3545;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-decoration-none {
+    text-decoration: none;
+  }
+  

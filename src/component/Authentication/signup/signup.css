@@ -4,13 +4,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
-.card {
-  width: 100%;
-  max-width: 400px;
-}
+
 
 .password-input {
   border-top-right-radius: 0;

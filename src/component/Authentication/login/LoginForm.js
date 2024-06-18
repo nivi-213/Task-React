@@ -49,7 +49,7 @@ const LoginForm = () => {
   };
   return (
     <div id="login-form" className="container">
-      <div className="card p-5">
+      <div className="card carding p-5">
         <h1>Login</h1>
         <form onSubmit={handleLoginSubmit} className="">
           <div className="mb-3">
