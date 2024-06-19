@@ -50,6 +50,8 @@ const AdminTable = () => {
               <th>User Name</th>
               <th>Email</th>
               <th>Mobile Number</th>
+     
+
               <th>Status</th>
             </tr>
           </thead>
@@ -60,6 +62,7 @@ const AdminTable = () => {
                 <td>{user.email}</td>
                 <td>{user.mobileNo}</td>
                 <td>{user.status}</td>
+        
               </tr>
             ))}
           </tbody>

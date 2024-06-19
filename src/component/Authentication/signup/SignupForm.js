@@ -15,6 +15,7 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
+  
   const [showPassword, setShowPassword] = useState(false);
   const [isAdminExists, setIsAdminExists] = useState(false);
 
@@ -196,11 +197,11 @@ const SignupForm = () => {
           }
         });
         setErrors(newErrors);
-        setMessage("Error: Unable to register.");
+        // setMessage("Error: Unable to register.");
       } else if (error.request) {
-        setMessage("Error: No response received from server.");
+        // setMessage("Error: No response received from server.");
       } else {
-        setMessage("Error: Something went wrong while sending the request.");
+        // setMessage("Error: Something went wrong while sending the request.");
       }
     }
   };

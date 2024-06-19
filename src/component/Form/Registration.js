@@ -1,218 +1,22 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 
-// const UserTable = () => {
-//   const [userData, setUserData] = useState(null);
-//   const [error, setError] = useState(null);
-//   const [isEditing, setIsEditing] = useState(false);
-//   const [formData, setFormData] = useState({
-//     userName: '',
-//     email: '',
-//     mobileNo: '',
-//     status: '',
-//   });
-
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       const token = localStorage.getItem('token');
-//       const username = localStorage.getItem('username');
-
-//       if (!token || !username) {
-//         setError({ error: { reason: 'Token or username not found in local storage' } });
-//         return;
-//       }
-
-//       try {
-//         const response = await axios.get(`http://localhost:8080/api/user/getUser/${username}`, {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         });
-
-//         console.log('Response headers:', response.headers);
-
-//         if (response.headers['content-type'] !== 'application/json') {
-//           throw new Error('Server did not respond with JSON data');
-//         }
-
-//         setUserData(response.data); // Assuming response.data is the user object
-//         setFormData({
-//           userName: response.data.Details.userName,
-//           email: response.data.Details.email,
-//           mobileNo: response.data.Details.mobileNo,
-//           status: response.data.Details.status,
-//         });
-//       } catch (err) {
-//         const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
-//         setError(err.response?.data || defaultError);
-//         console.error('Error fetching user data:', err);
-//       }
-//     };
-
-//     fetchUserData();
-//   }, []);
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({
-//       ...formData,
-//       [name]: value,
-//     });
-//   };
-
-//   const handleEdit = async () => {
-//     const token = localStorage.getItem('token');
-//     const username = localStorage.getItem('username');
-
-//     if (!token || !username) {
-//       setError({ error: { reason: 'Token or username not found in local storage' } });
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.put(`http://localhost:8080/api/user/update`, formData, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       setUserData(response.data);
-//       setIsEditing(false);
-//     } catch (err) {
-//       const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
-//       setError(err.response?.data || defaultError);
-//       console.error('Error updating user data:', err);
-//     }
-//   };
-
-//   const handleDelete = async () => {
-//     const token = localStorage.getItem('token');
-//     const username = localStorage.getItem('username');
-
-//     if (!token || !username) {
-//       setError({ error: { reason: 'Token or username not found in local storage' } });
-//       return;
-//     }
-
-//     try {
-//       await axios.delete(`http://localhost:8080/api/user/deleteUser/${username}`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       setUserData(null); // Clear user data on successful delete
-//     } catch (err) {
-//       const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
-//       setError(err.response?.data || defaultError);
-//       console.error('Error deleting user data:', err);
-//     }
-//   };
-
-//   if (error) {
-//     return (
-//       <div>
-//         <p>Error: {error.error?.reason || 'No error message available'}</p>
-//         <p>Timestamp: {error.timeStamp || 'No timestamp available'}</p>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="container tab-style">
-//       {userData ? (
-//         <div>
-//           <h2>User Profile</h2>
-//           {isEditing ? (
-//             <div>
-//               <label>
-//                 User Name:
-//                 <input
-//                   type="text"
-//                   name="userName"
-//                   value={formData.userName}
-//                   onChange={handleInputChange}
-//                 />
-//               </label>
-//               <label>
-//                 Email:
-//                 <input
-//                   type="email"
-//                   name="email"
-//                   value={formData.email}
-//                   onChange={handleInputChange}
-//                 />
-//               </label>
-//               <label>
-//                 Mobile Number:
-//                 <input
-//                   type="text"
-//                   name="mobileNo"
-//                   value={formData.mobileNo}
-//                   onChange={handleInputChange}
-//                 />
-//               </label>
-//               <label>
-//                 Status:
-//                 <input
-//                   type="text"
-//                   name="status"
-//                   value={formData.status}
-//                   onChange={handleInputChange}
-//                 />
-//               </label>
-//               <button onClick={handleEdit}>Save</button>
-//               <button onClick={() => setIsEditing(false)}>Cancel</button>
-//             </div>
-//           ) : (
-//             <div>
-//               <table className="table">
-//                 <thead>
-//                   <tr>
-//                     <th>User Name</th>
-//                     <th>Email</th>
-//                     <th>Mobile Number</th>
-//                     <th>Status</th>
-//                     <th>Actions</th>
-//                   </tr>
-//                 </thead>
-//                 <tbody>
-//                   <tr>
-//                     <td>{userData.Details.userName}</td>
-//                     <td>{userData.Details.email}</td>
-//                     <td>{userData.Details.mobileNo}</td>
-//                     <td>{userData.Details.status}</td>
-//                     <td>
-//                       <button onClick={() => setIsEditing(true)}>Edit</button>
-//                       <button onClick={handleDelete}>Delete</button>
-//                     </td>
-//                   </tr>
-//                 </tbody>
-//               </table>
-//             </div>
-//           )}
-//         </div>
-//       ) : (
-//         <p>Loading...</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default UserTable;
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './register.css';
 
 const UserTable = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
+    id: '',
     userName: '',
     email: '',
     mobileNo: '',
     status: '',
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -231,14 +35,13 @@ const UserTable = () => {
           },
         });
 
-        console.log('Response headers:', response.headers);
-
         if (response.headers['content-type'] !== 'application/json') {
           throw new Error('Server did not respond with JSON data');
         }
 
-        setUserData(response.data); // Assuming response.data is the user object
+        setUserData(response.data);
         setFormData({
+          id: response.data.Details.id,
           userName: response.data.Details.userName,
           email: response.data.Details.email,
           mobileNo: response.data.Details.mobileNo,
@@ -247,7 +50,6 @@ const UserTable = () => {
       } catch (err) {
         const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
         setError(err.response?.data || defaultError);
-        console.error('Error fetching user data:', err);
       }
     };
 
@@ -264,28 +66,32 @@ const UserTable = () => {
 
   const handleEdit = async () => {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
 
-    if (!token || !username) {
-      setError({ error: { reason: 'Token or username not found in local storage' } });
-      return;
+    if (!token) {
+        setError({ error: { reason: 'Token not found in local storage' } });
+        return;
     }
 
     try {
-      const response = await axios.put(`http://localhost:8080/api/user/update`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const response = await axios.put(`http://localhost:8080/api/user/update`, {
+            id: formData.id,
+            userName: formData.userName,
+            email: formData.email,
+            mobileNo: formData.mobileNo,
+            status: formData.status,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
-      setUserData(response.data);
-      setIsEditing(false);
+        setUserData(response.data.Details);
+        setIsEditing(false);
     } catch (err) {
-      const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
-      setError(err.response?.data || defaultError);
-      console.error('Error updating user data:', err);
+        const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
+        setError(err.response?.data || defaultError);
     }
-  };
+};
 
   const handleDelete = async () => {
     const token = localStorage.getItem('token');
@@ -303,12 +109,12 @@ const UserTable = () => {
         },
       });
 
-      setUserData(null); // Clear user data on successful delete
+      setUserData(null);
       alert('User deleted successfully');
+      navigate('/login');
     } catch (err) {
       const defaultError = { error: { reason: 'Unknown error occurred' }, timeStamp: new Date().toISOString() };
       setError(err.response?.data || defaultError);
-      console.error('Error deleting user data:', err);
     }
   };
 
@@ -331,6 +137,7 @@ const UserTable = () => {
               <label>
                 User Name:
                 <input
+                  className="form-control"
                   type="text"
                   name="userName"
                   value={formData.userName}
@@ -340,6 +147,7 @@ const UserTable = () => {
               <label>
                 Email:
                 <input
+                  className="form-control"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -349,6 +157,7 @@ const UserTable = () => {
               <label>
                 Mobile Number:
                 <input
+                  className="form-control"
                   type="text"
                   name="mobileNo"
                   value={formData.mobileNo}
@@ -358,14 +167,15 @@ const UserTable = () => {
               <label>
                 Status:
                 <input
+                  className="form-control"
                   type="text"
                   name="status"
                   value={formData.status}
                   onChange={handleInputChange}
                 />
               </label>
-              <button onClick={handleEdit}>Save</button>
-              <button onClick={() => setIsEditing(false)}>Cancel</button>
+              <button className="btn btn-primary" onClick={handleEdit}>Save</button>
+              <button className="btn btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
             </div>
           ) : (
             <div>
@@ -386,8 +196,8 @@ const UserTable = () => {
                     <td>{userData.Details.mobileNo}</td>
                     <td>{userData.Details.status}</td>
                     <td>
-                      <button onClick={() => setIsEditing(true)}>Edit</button>
-                      <button onClick={handleDelete}>Delete</button>
+                      <button className="btn btn-primary" onClick={() => setIsEditing(true)}>Edit</button>
+                      <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
                     </td>
                   </tr>
                 </tbody>
@@ -396,7 +206,7 @@ const UserTable = () => {
           )}
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Deleted...</p>
       )}
     </div>
   );

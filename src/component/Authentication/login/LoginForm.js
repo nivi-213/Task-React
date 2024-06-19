@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
@@ -6,6 +6,7 @@ import "./login.css";
 const LoginForm = () => {
   const [fullName, setFullname] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -21,13 +22,13 @@ const LoginForm = () => {
         }
       );
 
-      console.log(response.data); // Log the entire response data for debugging
+      console.log(response.data); 
 
-      const responseBody = response.data.data.body; // Adjusted to access the correct level of response data
+      const responseBody = response.data.data.body; 
 
       if (responseBody && responseBody.jwt) {
-        localStorage.setItem("token", responseBody.jwt); // Store the token
-        localStorage.setItem("username", responseBody.userName); // Store the username
+        localStorage.setItem("token", responseBody.jwt); 
+        localStorage.setItem("username", responseBody.userName);
 
         // Determine user role and navigate accordingly
         if (responseBody.role === "USER") {
@@ -39,7 +40,7 @@ const LoginForm = () => {
           console.error("Unexpected user role", responseBody.role);
         }
       } else {
-        setMessage("Unexpected response structure");
+        setMessage("User is not Found");
         console.error("Unexpected response structure", response.data);
       }
     } catch (error) {
@@ -47,6 +48,7 @@ const LoginForm = () => {
       console.error("There was an error!", error);
     }
   };
+
   return (
     <div id="login-form" className="container">
       <div className="card carding p-5">
@@ -61,14 +63,20 @@ const LoginForm = () => {
               onChange={(e) => setFullname(e.target.value)}
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-3 password-field">
             <input
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               className="form-control"
               placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <span
+              className="password-toggle-icon"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
+              {passwordVisible ?"👁️": "🙈"  }
+            </span>
           </div>
           <button type="submit" className="btn btn-success w-100">
             Login
